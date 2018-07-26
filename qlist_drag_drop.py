@@ -29,7 +29,7 @@ class ThumbListWidget(QListWidget):
             super(ThumbListWidget, self).dragMoveEvent(event)
 
     def dropEvent(self, event):
-        print('dropEvent', event)
+        #print('dropEvent', event)
         if event.mimeData().hasUrls():
             event.setDropAction(QtCore.Qt.CopyAction)
             event.accept()
@@ -91,16 +91,17 @@ class Window(QMainWindow):
         self.listWidgetB.currentItemChanged.connect(self.item_clicked)
 
     def items_dropped(self, arg):
-        print ('items_dropped', arg)
+        pass #print ('items_dropped', arg)
 
     def item_clicked(self, arg):
-        print (arg)
+        pass #print (arg)
 
     def deleteItem(self):
         listItems = self.listWidgetB.selectedItems()
         if not listItems:
             self.listWidgetB.setCurrentItem (self.listWidgetB.item (0))
-            self.deleteItem()
+            if self.listWidgetB.count()ß > 0:
+                self.deleteItem()
         for item in listItems:
             self.listWidgetB.takeItem(self.listWidgetB.row(item))
 

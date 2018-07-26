@@ -36,7 +36,7 @@ class ThumbListWidget(QListWidget):
             links = []
             for url in event.mimeData().urls():
                 links.append(str(url.toLocalFile()))
-            self.emit(QtCore.SIGNAL("dropped"), links)
+
         else:
             event.setDropAction(QtCore.Qt.MoveAction)
             super(ThumbListWidget, self).dropEvent(event)

@@ -1,1 +1,2 @@
-# Pyqt5_QList_dragNdrop
+# Python PyQt6 Custom Drag and Drop QListWidget 
+

@@ -51,7 +51,8 @@ class Window(QMainWindow):
         self.listWidgetB.currentItemChanged.connect(self.item_clicked)
 
     def item_clicked(self, arg):
-        print(arg)
+        # print(arg)
+        pass
 
     def deleteItem(self):
         listItems = self.listWidgetB.selectedItems()

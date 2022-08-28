@@ -1,46 +1,43 @@
 import sys
 
 from PyQt6.QtWidgets import (QApplication, QListWidgetItem, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton)
-from PyQt6.QtCore import pyqtSignal
 from qlist_drag_drop import ThumbListWidget
 
 
-class Window(QMainWindow):
-    trigger = pyqtSignal()
-
+class Window(QWidget):
+    
     def __init__(self):
-        super(QMainWindow, self).__init__()
+        super(QWidget, self).__init__()
         self.listItems = {}
 
-        myQWidget = QWidget()
-        self.setCentralWidget(myQWidget)
-
-        myBoxLayout = QVBoxLayout()
+        # Main layout: vertical
+        main_layout = QVBoxLayout()
+        
+        # first list
         self.listWidgetA = ThumbListWidget(self)
         self.listWidgetA.setAcceptDrops(False)
-        # self.listWidgetA.setAlternatingRowColors (True)
         for i in range(12):
             QListWidgetItem('Item ' + str(i), self.listWidgetA)
-        myBoxLayout.addWidget(self.listWidgetA)
-
+        main_layout.addWidget(self.listWidgetA)
+        # second list
         self.listWidgetB = ThumbListWidget(self)
-        myBoxLayout.addWidget(self.listWidgetB)
+        main_layout.addWidget(self.listWidgetB)
         self.listWidgetB.setAcceptDrops(True)
 
-        # create widgets
+        # buttons
         delButton = QPushButton("Delete Item")
         clrButton = QPushButton("Clear List ")
         saveButton = QPushButton("Save List  ")
 
-        # define layout: a horizontal box with three buttons in it
+        # add buttons to a horizontal layout
         hbox = QHBoxLayout()
         hbox.addWidget(delButton)
         hbox.addWidget(clrButton)
         hbox.addWidget(saveButton)
         hbox.setContentsMargins(0, 0, 0, 0)
-
-        myBoxLayout.addLayout(hbox)
-        myQWidget.setLayout(myBoxLayout)
+        # and add it to main layout 
+        main_layout.addLayout(hbox)
+        self.setLayout(main_layout)
 
         # connect button to methods on_click
         delButton.clicked.connect(self.deleteItem)
